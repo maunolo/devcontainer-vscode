@@ -12,8 +12,7 @@
 	"extensions": [
 			"rebornix.ruby",
 			"castwide.solargraph",
-			"misogi.ruby-rubocop",
-			"eamodio.gitlens"
+			"misogi.ruby-rubocop"
 	],
 	"settings": {
 		"terminal.integrated.profiles.linux": {
