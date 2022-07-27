@@ -1,5 +1,5 @@
 # Devcontainer VS-Code
-My devcontainer folder for vscode with zsh and themes
+My docker devcontainer config folder for vscode with zsh
 
 ![image](https://user-images.githubusercontent.com/44609720/181360095-ec173464-a4c2-4172-8836-7ac99c60b9fa.png)
 
