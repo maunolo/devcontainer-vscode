@@ -1,14 +1,14 @@
 {
-	"name": "Service Name",
-	"workspaceFolder": "/path/to/service",
-	"dockerComposeFile": [
+	"name": "Service Name", // Name of the service
+	"workspaceFolder": "/path/to/service", // Path to the service directory inside the container
+	"dockerComposeFile": [ // docker-compose.yml file(s) to use
 			"../docker-compose.yml",
 			"../docker-compose.override.yml",
 			"../docker-compose.debug.yml"
 	],
-	"service": "service_name",
-	"runServices": ["service_name"],
-	"forwardPorts": ["8080:80"],
+	"service": "service_name", // Name of the service in the docker-compose.yml file(s)
+	"runServices": ["service_name"], // List of services to run with the service
+	"forwardPorts": ["8080:80"], // HOST_PORT:CONTAINER_PORT
 	"extensions": [
 			"rebornix.ruby",
 			"castwide.solargraph",
