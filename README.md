@@ -7,7 +7,7 @@ My devcontainer folder for vscode with zsh and themes
 
 Inside your service:
 ```
- git clone git@github.com:maunolo/devcontainer-vscode.git .devcontainer
+ git clone https://github.com/maunolo/devcontainer-vscode.git .devcontainer
 ```
 
 Then just open the `devcontainer.json` file and edit the options to match your docker compose configuration
