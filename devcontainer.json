@@ -23,5 +23,5 @@
 		},
 		"terminal.integrated.defaultProfile.linux": "zsh"
 	},
-	"postCreateCommand": ["sh", ".devcontainer/zsh_docker_install.sh", "-d", "/opt/app"]
+	"postCreateCommand": ["sh", ".devcontainer/zsh_docker_install.sh"]
 }
