@@ -53,11 +53,11 @@ install_dependencies() {
 
     case $DIST in
         alpine)
-            $Sudo apk add --update --no-cache git curl zsh
+            $Sudo apk add --update --no-cache git curl zsh ssh
         ;;
         centos | amzn)
             $Sudo yum update -y
-            $Sudo yum install -y git curl
+            $Sudo yum install -y git curl ssh
             $Sudo yum install -y ncurses-compat-libs # this is required for AMZN Linux (ref: https://github.com/emqx/emqx/issues/2503)
             $Sudo curl http://mirror.ghettoforge.org/distributions/gf/el/7/plus/x86_64/zsh-5.1-1.gf.el7.x86_64.rpm > zsh-5.1-1.gf.el7.x86_64.rpm
             $Sudo rpm -i zsh-5.1-1.gf.el7.x86_64.rpm
@@ -65,7 +65,7 @@ install_dependencies() {
         ;;
         *)
             $Sudo apt-get update
-            $Sudo apt-get -y install git curl zsh locales
+            $Sudo apt-get -y install git curl zsh locales ssh
             if [ "$VERSION" != "14.04" ]; then
                 $Sudo apt-get -y install locales-all
             fi
