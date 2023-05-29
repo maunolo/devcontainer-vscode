@@ -1,0 +1,29 @@
+{
+	"name": "Service Name",
+	"workspaceFolder": "/path/to/service",
+	"dockerComposeFile": [
+			"../../../docker-compose.yml",
+			"../../../docker-compose.override.yml",
+			"../../../docker-compose.debug.yml"
+	],
+	"service": "service_name",
+	"runServices": ["service_name"],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rebornix.ruby",
+				"castwide.solargraph",
+				"misogi.ruby-rubocop"
+			],
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"zsh": {
+						"path": "/usr/bin/zsh"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
+		}
+	},
+	"onCreateCommand": ["sh", ".devcontainer/zsh_docker_install.sh"]
+}
