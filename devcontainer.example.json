@@ -25,5 +25,5 @@
 			}
 		}
 	},
-	"onCreateCommand": ["sh", ".devcontainer/zsh_docker_install.sh"]
+	"onCreateCommand": ["sh", ".devcontainer/setup.sh"]
 }

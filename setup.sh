@@ -53,11 +53,11 @@ install_dependencies() {
 
     case $DIST in
         alpine)
-            $Sudo apk add --update --no-cache git curl zsh ssh
+            $Sudo apk add --update --no-cache git curl zsh ssh build-base cmake coreutils curl unzip gettext-tiny-dev
         ;;
         centos | amzn)
             $Sudo yum update -y
-            $Sudo yum install -y git curl ssh
+            $Sudo yum install -y git curl ssh ninja-build cmake gcc make unzip gettext
             $Sudo yum install -y ncurses-compat-libs # this is required for AMZN Linux (ref: https://github.com/emqx/emqx/issues/2503)
             $Sudo curl http://mirror.ghettoforge.org/distributions/gf/el/7/plus/x86_64/zsh-5.1-1.gf.el7.x86_64.rpm > zsh-5.1-1.gf.el7.x86_64.rpm
             $Sudo rpm -i zsh-5.1-1.gf.el7.x86_64.rpm
@@ -65,7 +65,7 @@ install_dependencies() {
         ;;
         *)
             $Sudo apt-get update
-            $Sudo apt-get -y install git curl zsh locales ssh
+            $Sudo apt-get -y install git curl zsh locales ssh ninja-build gettext cmake unzip
             if [ "$VERSION" != "14.04" ]; then
                 $Sudo apt-get -y install locales-all
             fi
@@ -90,9 +90,44 @@ export ZSH="$_HOME/.oh-my-zsh"
 ZSH_THEME="${_THEME}"
 plugins=($_PLUGINS)
 
+alias vim='nvim'
+
 EOM
     printf "$ZSHRC_APPEND"
     printf "\nsource \$ZSH/oh-my-zsh.sh\n"
+}
+
+install_nvim() {
+    if ! command -v nvim &> /dev/null
+    then
+        echo "###### Downloading nvim source"
+
+        curl -L -o nvim.tar.gz https://github.com/neovim/neovim/archive/refs/tags/stable.tar.gz
+
+        echo "###### Extracting nvim"
+
+        tar xzf nvim.tar.gz
+
+        echo "###### Building nvim"
+
+        cd neovim-stable
+        make CMAKE_BUILD_TYPE=Release
+        make install
+        cd ..
+
+        rm -rf neovim-stable nvim.tar.gz
+    fi
+
+    echo "###### Clonning Packer"
+
+    PACKER_DIR="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    if [ ! -d "$PACKER_DIR" ]; then
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_DIR
+    fi
+    
+    echo "###### Packer Sync"
+
+    nvim --headless --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 }
 
 install_dependencies
@@ -128,3 +163,6 @@ fi
 
 # Generate .zshrc
 zshrc_template "$HOME" "$THEME" "$plugin_list" > $HOME/.zshrc
+
+install_nvim
+
